@@ -2,17 +2,31 @@
 
 namespace Core;
 
-trait MessageTrait {
+trait MessageTrait
+{
     protected object $messenger;
 
-    public function setMessenger($obj = null){
-        if($obj)
+
+    /**
+     * задание класса для отправки сообщений
+     * класс сообщений
+     * @param $obj
+     * @return void
+     */
+    public function setMessenger($obj = null)
+    {
+        if ($obj)
             $this->messenger = $obj;
         else
             $this->messenger = Message::createInstance();
     }
 
-    protected function sendMessage($str):void
+    /**
+     * отправка сообщений пользователю
+     * @param $str
+     * @return void
+     */
+    protected function sendMessage($str): void
     {
         $this->messenger->sendMessage($str);
     }

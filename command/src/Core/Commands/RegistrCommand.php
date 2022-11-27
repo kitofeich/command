@@ -11,6 +11,13 @@ class RegistrCommand extends Command
     protected string $newClassName;
     protected string $newFileName;
 
+    /**
+     * проверяем наличие пути и существования файлы
+     *
+     * @param array $arguments
+     * @param array $options
+     * @return void
+     */
     protected function checkParams(array $arguments = array(), array $options = array()): void
     {
 
@@ -30,6 +37,7 @@ class RegistrCommand extends Command
     }
 
     /**
+     * сама регистрация, основная проверка класса , создание описания
      * @param array $arguments
      * @param array $options
      * @return void
@@ -49,6 +57,12 @@ class RegistrCommand extends Command
         $this->sendMessage('Выполнено');
     }
 
+    /**
+     * пытаемся добавить класс и проверить работоспособность
+     * //todo тут бы еще эксепшены обработать
+     * @param string $path
+     * @return void
+     */
     protected function checkNewClass(string $path): void
     {
         try {
@@ -65,7 +79,12 @@ class RegistrCommand extends Command
         }
     }
 
-//Message::trowMessage('Новая команда должна наследоваться от класса Command');
+
+    /**
+     * удаление перенесенного файла
+     * @param $path
+     * @return void
+     */
     protected function delFile($path)
     {
         try {

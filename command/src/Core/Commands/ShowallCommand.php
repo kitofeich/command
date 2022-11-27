@@ -66,6 +66,7 @@ class ShowallCommand extends Command
     }
 
     /**
+     * ф-ця сортировки
      * @param $ar
      * @return array
      */
@@ -86,6 +87,7 @@ class ShowallCommand extends Command
     }
 
     /**
+     * преобразование аргументов в удобоваримый вид
      * @param $arguments
      * @return array
      */
@@ -106,6 +108,7 @@ class ShowallCommand extends Command
     }
 
     /**
+     * преобразование параметров в удобоваримый вид
      * @param $options
      * @return array
      */
@@ -117,6 +120,7 @@ class ShowallCommand extends Command
     }
 
     /**
+     * циклическая сборка вложенного массива
      * @param array $options
      * @param bool $needKey
      * @return array

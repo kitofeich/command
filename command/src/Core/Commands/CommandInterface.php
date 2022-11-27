@@ -6,9 +6,11 @@ interface CommandInterface
 {
 
     /**
+     * тут храниться базовое описание команды, вызывается при добавлении
      * @return string
      */
     public function getDefaultDescription(): string;
+
     /**
      * @param string $str
      * @return void
@@ -21,6 +23,7 @@ interface CommandInterface
     public function getDescription(): string;
 
     /**
+     * основная ф-ция команды
      * @param array $arguments
      * @param array $options
      * @return void

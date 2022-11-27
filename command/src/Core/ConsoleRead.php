@@ -21,6 +21,7 @@ class ConsoleRead
         }
     }
 
+    //запуск разбора массива, в кторый превратилась строка, поэлементный
     public function read(): void
     {
         $this->setMethod($this->userData[1]);
@@ -34,6 +35,7 @@ class ConsoleRead
     }
 
     /**
+     * разбираемся с первым элементов именем метода
      * @param string $methodName
      * @return void
      */
@@ -44,6 +46,7 @@ class ConsoleRead
     }
 
     /**
+     * проверки имени метода
      * @param string $methodName
      * @return bool
      */
@@ -55,6 +58,7 @@ class ConsoleRead
     }
 
     /**
+     * проверка на допустимые символы
      * @param string $methodName
      * @return bool
      */
@@ -67,6 +71,7 @@ class ConsoleRead
     }
 
     /**
+     * проверка на существование метода с таким именем
      * @param string $methodName
      * @return bool
      */
@@ -79,19 +84,19 @@ class ConsoleRead
     }
 
     /**
+     * базовый метод разбора элемента
      * @param string $str
      * @return void
      */
     protected function checkStr(string $str): void
     {
-        //не может быть меньше
+        //не может быть меньше ни аргумент, ни параметр
         if (strlen($str) < 3)
             $this->sendMessage($this->errorOptions . $str);
 
         // пытаемся найти и поставить атрибут
         if ($this->checkArgument($str))
             $this->setArgument($this->parseArgument($str));
-
         else {
             //не получилось, пытаемся с параметром
             if ($this->checkParam($str))
@@ -103,6 +108,7 @@ class ConsoleRead
     }
 
     /**
+     * пытаемся в базовой строке найти признаки указывающие что это аргумент
      * @param string $str
      * @return bool
      */
@@ -129,6 +135,7 @@ class ConsoleRead
     }
 
     /**
+     * парсим переданную строку на отдельные аргументы, тут перестарался, часть операции делает сам пхп
      * @param string $str
      * @return array
      */
@@ -141,12 +148,13 @@ class ConsoleRead
         //1 буква тоже аргемент
         foreach (explode(',', $str) as $arg) {
             //$arguments[$arg] = $arg;
-            $arguments += [ $arg => $arg ];
+            $arguments += [$arg => $arg];
         }
         return $arguments;
     }
 
     /**
+     * выставление найденных аргументов
      * @param array $arguments
      * @return void
      */
@@ -156,6 +164,7 @@ class ConsoleRead
     }
 
     /**
+     * проверяем строку на то что она параметр
      * @param string $str
      * @return bool
      */
@@ -182,6 +191,7 @@ class ConsoleRead
     }
 
     /**
+     * разбираем строку на параметр и значение и проверяем имя параметра, в ключ не все зайдет
      * @param string $str
      * @return array
      */
@@ -195,6 +205,7 @@ class ConsoleRead
     }
 
     /**
+     * выставляем вычлененные параменты
      * @param array $parseParam
      * @return void
      */
@@ -211,6 +222,7 @@ class ConsoleRead
     }
 
     /**
+     * проверка имени параметра на допустимые символы
      * @param string $str
      * @return bool
      */
@@ -223,6 +235,7 @@ class ConsoleRead
     }
 
     /**
+     * проверка на то что передана чистая строка без дополнительных символов, упростилось )
      * @param string $str
      * @return bool
      */
@@ -233,6 +246,7 @@ class ConsoleRead
     }
 
     /**
+     * собственно сама проверка на символы
      * @param string $str
      * @return bool
      */

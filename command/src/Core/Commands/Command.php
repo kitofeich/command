@@ -63,6 +63,9 @@ abstract class Command implements CommandInterface
     }
 
     /**
+     * первичное выполнение в родителе, хелп, установка описания,
+     * вызов проверки присланных атрибутов на минимально необходимое команде
+     *
      * @param array $arguments
      * @param array $options
      * @return void
@@ -74,7 +77,7 @@ abstract class Command implements CommandInterface
             $this->sendMessage($this->getDescription());
 
         if (isset($arguments['setDescription'])) {
-            if(!$arguments['setDescription'])
+            if (!$arguments['setDescription'])
                 $this->sendMessage('для смены описания его надо поместить в агрумент description, например "[description=\'Новое описание команды\']"');
             $this->setDescription($options['description']);
             $this->sendMessage('Выполнено');
@@ -84,6 +87,7 @@ abstract class Command implements CommandInterface
     }
 
     /**
+     * вывод сообщения пользователю
      * @param $message
      * @return void
      */
@@ -93,6 +97,11 @@ abstract class Command implements CommandInterface
         $this->needExecute = false;
     }
 
+
+    /**
+     * определение пути до класса потомка для работы ф-ций описания
+     * @return string
+     */
     protected function getPathDesc(): string
     {
         $ar = explode('\\', get_class($this));

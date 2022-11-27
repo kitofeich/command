@@ -2,7 +2,6 @@
 
 namespace Core;
 
-use PHPUnit\Framework\TestCase;
 
 class Initializer
 {
@@ -13,16 +12,26 @@ class Initializer
         $this->setMessenger();
     }
 
-    static function checkMethod($str) : bool
+    /**
+     * проверка метода по имени как указывается в консоли
+     * @param $str
+     * @return bool
+     */
+    static function checkMethod($str): bool
     {
-        return file_exists(__DIR__ . '/Commands/' . ucfirst($str) . 'Command.php' );
+        return file_exists(__DIR__ . '/Commands/' . ucfirst($str) . 'Command.php');
     }
 
-    function exec(ConsoleRead $data) : void
+    /**
+     * выполнение вызванного метода
+     * @param ConsoleRead $data
+     * @return void
+     */
+    function exec(ConsoleRead $data): void
     {
-        if(!$this->checkMethod($data->method))
+        if (!$this->checkMethod($data->method))
             $this->sendMessage('Ошибка вызова метода');
-        $className  = 'Core\Commands\\'.ucfirst($data->method . 'Command');
+        $className = 'Core\Commands\\' . ucfirst($data->method . 'Command');
         $executor = new $className();
 
         $executor->execute($data->arguments, $data->params);
