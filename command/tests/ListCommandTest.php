@@ -41,14 +41,16 @@ class ListCommandTest extends TestCase
     public function testExecute()
     {
 
-        $mockMessage = $this->createMock(Message::class)
-            ->method('sendMessage')->will($this->returnArgument(0));
+        $mockMessage = $this->getMockBuilder(Message::class)
+                        ->onlyMethods(['createInstance', 'sendMessage'])->getMock();
+        $mockMessage->method('sendMessage')->willReturnArgument(0);
+        $mockMessage->method('createInstance')->willReturnSelf();
+        $ar = array('Доступные для выполнения команды:', ' - ListCommand', ' - RegistrCommand', ' - ShowallCommand');
+        $mockMessage->expects($this->once())->method('sendMessage')->with($ar);
 
         $lc = new ListCommand();
         $lc->setMessenger($mockMessage);
-        $this->markTestIncomplete('');
         $lc->execute();
-        $this->assertMatchesRegularExpression("@список всех доступных@", $lc->execute());
 
     }
 
